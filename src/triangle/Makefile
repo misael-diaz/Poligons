@@ -1,8 +1,8 @@
 #!/usr/bin/make
 #
-# Polygons				February 10, 2024
+# Polygons					February 11, 2024
 #
-# source: src/Makefile
+# source: src/triangle/Makefile
 # author: @misael-diaz
 #
 # Synopsis:
@@ -14,11 +14,15 @@
 # (at your option) any later version.
 #
 
-all: rectangles triangles
+include make-inc
 
-rectangles:
-	@$(MAKE) -C rectangle
-triangles:
-	@$(MAKE) -C triangle
+all: $(TRIANGLE_BIN)
+
+$(TRIANGLE_BIN): $(TRIANGLE_OBJ)
+	$(CXX) $(CXXOPT) $(TRIANGLE_OBJ) -o $(TRIANGLE_BIN)
+
+$(TRIANGLE_OBJ): $(HEADERS) $(TRIANGLE_CXX)
+	$(CXX) $(INC) $(CXXOPT) -c $(TRIANGLE_CXX) -o $(TRIANGLE_OBJ)
+
 clean:
-	@$(MAKE) -C rectangle clean
+	/bin/rm -f *.obj *.bin
