@@ -16,7 +16,7 @@ int main ()
 	prompt();
 	clear();
 	area();
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 void info ()
