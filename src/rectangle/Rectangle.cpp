@@ -9,6 +9,7 @@ void info();
 void clear();
 void prompt();
 void area();
+void pause();
 
 int main ()
 {
@@ -16,6 +17,7 @@ int main ()
 	prompt();
 	clear();
 	area();
+	pause();
 	return EXIT_SUCCESS;
 }
 
@@ -33,6 +35,23 @@ void clear ()
 void clear ()
 {
         system("cls");
+}
+#else
+void clear ()
+{
+	return;
+}
+#endif
+
+#if defined(__unix__) || defined(__linux__) || defined(__APPLE__)
+void pause ()
+{
+        return;
+}
+#elif defined(_WIN32) || defined(_WIN64)
+void clear ()
+{
+        system("pause");
 }
 #else
 void clear ()
