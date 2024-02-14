@@ -49,12 +49,12 @@ void pause ()
         return;
 }
 #elif defined(_WIN32) || defined(_WIN64)
-void clear ()
+void pause ()
 {
         system("pause");
 }
 #else
-void clear ()
+void pause ()
 {
 	return;
 }
