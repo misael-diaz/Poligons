@@ -1,8 +1,8 @@
 #!/usr/bin/make
 #
-# Polygons				February 10, 2024
+# Polygons					February 11, 2024
 #
-# source: src/Makefile
+# source: src/circle/Makefile
 # author: @misael-diaz
 #
 # Synopsis:
@@ -14,15 +14,15 @@
 # (at your option) any later version.
 #
 
-all: rectangles triangles circles
+include make-inc
 
-rectangles:
-	@$(MAKE) -C rectangle
-triangles:
-	@$(MAKE) -C triangle
-circles:
-	@$(MAKE) -C circle
+all: $(CIRCLE_BIN)
+
+$(CIRCLE_BIN): $(CIRCLE_OBJ)
+	$(CXX) $(CXXOPT) $(CIRCLE_OBJ) -o $(CIRCLE_BIN)
+
+$(CIRCLE_OBJ): $(HEADERS) $(CIRCLE_CXX)
+	$(CXX) $(INC) $(CXXOPT) -c $(CIRCLE_CXX) -o $(CIRCLE_OBJ)
+
 clean:
-	@$(MAKE) -C rectangle clean
-	@$(MAKE) -C triangle clean
-	@$(MAKE) -C circle clean
+	/bin/rm -f *.obj *.bin
