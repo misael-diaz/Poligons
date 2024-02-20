@@ -14,7 +14,7 @@
 # (at your option) any later version.
 #
 
-all: rectangles triangles circles
+all: rectangles triangles circles parallelograms
 
 rectangles:
 	@$(MAKE) -C rectangle
@@ -22,7 +22,10 @@ triangles:
 	@$(MAKE) -C triangle
 circles:
 	@$(MAKE) -C circle
+parallelograms:
+	@$(MAKE) -C parallelogram
 clean:
 	@$(MAKE) -C rectangle clean
 	@$(MAKE) -C triangle clean
 	@$(MAKE) -C circle clean
+	@$(MAKE) -C parallelogram clean
