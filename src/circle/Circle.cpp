@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
+#include <iomanip>
 
 void info(void);
 void prompt(void);
@@ -67,8 +68,11 @@ void prompt (void)
 	double const r = radius();
 	double const a = area(r);
 	clear();
+	auto const default_precision = std::cout.precision();
+	std::cout << std::scientific << std::setprecision(15);
 	std::cout << "polygon: circle" << std::endl;
 	std::cout << "area: " << a << std::endl;
+	std::cout.precision(default_precision);
 }
 
 /*
