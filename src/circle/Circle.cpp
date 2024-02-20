@@ -3,6 +3,13 @@
 #include <iostream>
 #include <iomanip>
 
+struct Circle {
+	double _radius_ = 0;
+	Circle(double const radius);
+	double radius() const;
+	double area() const;
+};
+
 void info(void);
 void prompt(void);
 void pause(void);
@@ -57,16 +64,28 @@ static double radius (void)
 	return r;
 }
 
-static double area (double const r)
+Circle::Circle (double const radius) : _radius_(radius)
+{
+	return;
+}
+
+double Circle::radius () const
+{
+	return this->_radius_;
+}
+
+double Circle::area () const
 {
 	constexpr double pi = M_PI;
+	double const r = this->radius();
 	return (pi * r * r);
 }
 
 void prompt (void)
 {
 	double const r = radius();
-	double const a = area(r);
+	Circle circle(r);
+	double const a = circle.area();
 	clear();
 	auto const default_precision = std::cout.precision();
 	std::cout << std::scientific << std::setprecision(15);
