@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <iomanip>
 
 void info();
 void prompt();
@@ -74,8 +75,11 @@ void prompt ()
 	double const h = height();
 	double const a = area(w, h);
 	clear();
+	auto const default_precision = std::cout.precision();
+	std::cout << std::scientific << std::setprecision(15);
 	std::cout << "polygon: triangle" << std::endl;
 	std::cout << "area: " << a << std::endl;
+	std::cout.precision(default_precision);
 }
 
 /*
