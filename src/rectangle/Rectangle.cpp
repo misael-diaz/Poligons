@@ -82,7 +82,7 @@ void area ()
 {
 	_area_ = _width_ * _length_ ;
 	printf("polygon: rectangle\n");
-	printf("area: %f\n", _area_);
+	printf("area: %.15e\n", _area_);
 }
 
 void prompt ()
