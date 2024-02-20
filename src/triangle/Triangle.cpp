@@ -3,11 +3,13 @@
 
 void info();
 void prompt();
+void pause();
 
 int main ()
 {
 	info();
 	prompt();
+	pause();
 	return 0;
 }
 
@@ -28,6 +30,18 @@ void clear ()
 }
 #else
 void clear ()
+{
+	return;
+}
+#endif
+
+#if defined(_WIN32) || defined(_WIN64)
+void pause ()
+{
+	system("pause");
+}
+#else
+void pause ()
 {
 	return;
 }
