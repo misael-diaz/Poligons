@@ -14,7 +14,7 @@
 # (at your option) any later version.
 #
 
-all: rectangles triangles circles parallelograms
+all: rectangles triangles circles parallelograms trapezoids
 
 rectangles:
 	@$(MAKE) -C rectangle
@@ -24,8 +24,11 @@ circles:
 	@$(MAKE) -C circle
 parallelograms:
 	@$(MAKE) -C parallelogram
+trapezoids:
+	@$(MAKE) -C trapezoid
 clean:
 	@$(MAKE) -C rectangle clean
 	@$(MAKE) -C triangle clean
 	@$(MAKE) -C circle clean
 	@$(MAKE) -C parallelogram clean
+	@$(MAKE) -C trapezoid clean
