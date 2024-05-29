@@ -84,6 +84,7 @@ int main ()
 	}
 }
 
+#if defined(DEBUG) && DEBUG
 static void setTriangleBase (void)
 {
 	double base = 0;
@@ -92,7 +93,17 @@ static void setTriangleBase (void)
 	_triangle_right_base_ = base;
 	_triangle_right_base_defined_ = true;
 }
+#else
+static void setTriangleBase (void)
+{
+	double base = 0;
+	printf("input the base of the triangle:");
+	scanf("%lf", &base);
+	_triangle_right_base_ = base;
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void setTriangleHeight (void)
 {
 	double height = 0;
@@ -101,6 +112,15 @@ static void setTriangleHeight (void)
 	_triangle_right_height_ = height;
 	_triangle_right_height_defined_ = true;
 }
+#else
+static void setTriangleHeight (void)
+{
+	double height = 0;
+	printf("input the height of the triangle:");
+	scanf("%lf", &height);
+	_triangle_right_height_ = height;
+}
+#endif
 
 static void setTriangleDims (void)
 {
@@ -108,6 +128,7 @@ static void setTriangleDims (void)
 	setTriangleHeight();
 }
 
+#if defined(DEBUG) && DEBUG
 static void calcTriangleHypotenuse (void)
 {
 	// DEVNOTE: this is just a GUARD to catch implementation errors in development
@@ -123,7 +144,17 @@ static void calcTriangleHypotenuse (void)
 	_triangle_right_hypotenuse_ = hypotenuse;
 	_triangle_right_hypotenuse_defined_ = true;
 }
+#else
+static void calcTriangleHypotenuse (void)
+{
+	double const base = _triangle_right_base_;
+	double const height = _triangle_right_height_;
+	double const hypotenuse = sqrt((base * base) + (height * height));
+	_triangle_right_hypotenuse_ = hypotenuse;
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void calcTrianglePerimeter (void)
 {
 	bool const tr_base = _triangle_right_base_defined_;
@@ -142,7 +173,17 @@ static void calcTrianglePerimeter (void)
 	_triangle_right_perimeter_ = (base + height + hypotenuse);
 	_triangle_right_perimeter_defined_ = true;
 }
+#else
+static void calcTrianglePerimeter (void)
+{
+	double const base = _triangle_right_base_;
+	double const height = _triangle_right_height_;
+	double const hypotenuse = _triangle_right_hypotenuse_;
+	_triangle_right_perimeter_ = (base + height + hypotenuse);
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void calcTriangleArea (void)
 {
 	if (!_triangle_right_base_defined_ || !_triangle_right_height_defined_) {
@@ -154,6 +195,12 @@ static void calcTriangleArea (void)
 	_triangle_right_area_ = 0.5 * (_triangle_right_base_ * _triangle_right_height_);
 	_triangle_right_area_defined_ = true;
 }
+#else
+static void calcTriangleArea (void)
+{
+	_triangle_right_area_ = 0.5 * (_triangle_right_base_ * _triangle_right_height_);
+}
+#endif
 
 static void calcTriangleProps (void)
 {
@@ -167,6 +214,7 @@ static void promptTriangleDims (void)
 	setTriangleDims();
 }
 
+#if defined(DEBUG) && DEBUG
 static void logTriangleInfo (void)
 {
 	if (!_triangle_right_perimeter_defined_ || !_triangle_right_area_defined_) {
@@ -180,7 +228,17 @@ static void logTriangleInfo (void)
 	printf("area: %.15e\n", _triangle_right_area_);
 	printf("\n");
 }
+#else
+static void logTriangleInfo (void)
+{
+	printf("polygon: triangle\n");
+	printf("perimeter: %.15e\n", _triangle_right_perimeter_);
+	printf("area: %.15e\n", _triangle_right_area_);
+	printf("\n");
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void setRectangleLength (void)
 {
 	double length = 0;
@@ -189,7 +247,17 @@ static void setRectangleLength (void)
 	_rectangle_length_ = length;
 	_rectangle_length_defined_ = true;
 }
+#else
+static void setRectangleLength (void)
+{
+	double length = 0;
+	printf("input the length of the rectangle:");
+	scanf("%lf", &length);
+	_rectangle_length_ = length;
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void setRectangleWidth (void)
 {
 	double width = 0;
@@ -198,6 +266,15 @@ static void setRectangleWidth (void)
 	_rectangle_width_ = width;
 	_rectangle_width_defined_ = true;
 }
+#else
+static void setRectangleWidth (void)
+{
+	double width = 0;
+	printf("input the width of the rectangle:");
+	scanf("%lf", &width);
+	_rectangle_width_ = width;
+}
+#endif
 
 static void setRectangleDims (void)
 {
@@ -205,6 +282,7 @@ static void setRectangleDims (void)
 	setRectangleWidth();
 }
 
+#if defined(DEBUG) && DEBUG
 static void calcRectanglePerimeter (void)
 {
 	if (!_rectangle_width_defined_ || !_rectangle_length_defined_) {
@@ -216,7 +294,14 @@ static void calcRectanglePerimeter (void)
 	_rectangle_perimeter_ = 2.0 * (_rectangle_width_ + _rectangle_length_);
 	_rectangle_perimeter_defined_ = true;
 }
+#else
+static void calcRectanglePerimeter (void)
+{
+	_rectangle_perimeter_ = 2.0 * (_rectangle_width_ + _rectangle_length_);
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void calcRectangleArea (void)
 {
 	if (!_rectangle_width_defined_ || !_rectangle_length_defined_) {
@@ -228,6 +313,12 @@ static void calcRectangleArea (void)
 	_rectangle_area_ = (_rectangle_width_ * _rectangle_length_);
 	_rectangle_area_defined_ = true;
 }
+#else
+static void calcRectangleArea (void)
+{
+	_rectangle_area_ = (_rectangle_width_ * _rectangle_length_);
+}
+#endif
 
 static void calcRectangleProps (void)
 {
@@ -240,6 +331,7 @@ static void promptRectangleDims (void)
 	setRectangleDims();
 }
 
+#if defined(DEBUG) && DEBUG
 static void logRectangleInfo (void)
 {
 	if (!_rectangle_perimeter_defined_ || !_rectangle_area_defined_) {
@@ -253,7 +345,17 @@ static void logRectangleInfo (void)
 	printf("area: %.15e\n", _rectangle_area_);
 	printf("\n");
 }
+#else
+static void logRectangleInfo (void)
+{
+	printf("polygon: rectangle\n");
+	printf("perimeter: %.15e\n", _rectangle_perimeter_);
+	printf("area: %.15e\n", _rectangle_area_);
+	printf("\n");
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void setTrapezoidMinorBase (void)
 {
 	double base_minor = 0;
@@ -262,7 +364,17 @@ static void setTrapezoidMinorBase (void)
 	_trapezoid_base_minor_ = base_minor;
 	_trapezoid_base_minor_defined_ = true;
 }
+#else
+static void setTrapezoidMinorBase (void)
+{
+	double base_minor = 0;
+	printf("input the minor base of the trapezoid:");
+	scanf("%lf", &base_minor);
+	_trapezoid_base_minor_ = base_minor;
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void setTrapezoidMajorBase (void)
 {
 	double base_major = 0;
@@ -271,7 +383,17 @@ static void setTrapezoidMajorBase (void)
 	_trapezoid_base_major_ = base_major;
 	_trapezoid_base_major_defined_ = true;
 }
+#else
+static void setTrapezoidMajorBase (void)
+{
+	double base_major = 0;
+	printf("input the major base of the trapezoid:");
+	scanf("%lf", &base_major);
+	_trapezoid_base_major_ = base_major;
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void setTrapezoidHeight (void)
 {
 	double height = 0;
@@ -280,6 +402,15 @@ static void setTrapezoidHeight (void)
 	_trapezoid_height_ = height;
 	_trapezoid_height_defined_ = true;
 }
+#else
+static void setTrapezoidHeight (void)
+{
+	double height = 0;
+	printf("input the height of the trapezoid:");
+	scanf("%lf", &height);
+	_trapezoid_height_ = height;
+}
+#endif
 
 static void setTrapezoidDims (void)
 {
@@ -288,6 +419,7 @@ static void setTrapezoidDims (void)
 	setTrapezoidHeight();
 }
 
+#if defined(DEBUG) && DEBUG
 static void calcTrapezoidArea (void)
 {
 	bool const t_base_minor_defined = _trapezoid_base_minor_defined_;
@@ -305,7 +437,17 @@ static void calcTrapezoidArea (void)
 	_trapezoid_area_ = (0.5 * (base_minor + base_major) * height);
 	_trapezoid_area_defined_ = true;
 }
+#else
+static void calcTrapezoidArea (void)
+{
+	double const base_minor = _trapezoid_base_minor_;
+	double const base_major = _trapezoid_base_major_;
+	double const height = _trapezoid_height_;
+	_trapezoid_area_ = (0.5 * (base_minor + base_major) * height);
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void calcTrapezoidLateralSide (void)
 {
 	if (!_trapezoid_area_defined_) {
@@ -335,7 +477,20 @@ static void calcTrapezoidLateralSide (void)
 	_trapezoid_lateral_side_ = lateral_side;
 	_trapezoid_lateral_side_defined_ = true;
 }
+#else
+static void calcTrapezoidLateralSide (void)
+{
+	double const area = _trapezoid_area_;
+	double const height = _trapezoid_height_;
+	double const base_minor = _trapezoid_base_minor_;
+	double const triangle_base = ((area / height) - base_minor);
+	double const base = triangle_base;
+	double const lateral_side = sqrt((base * base) + (height * height));
+	_trapezoid_lateral_side_ = lateral_side;
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void calcTrapezoidPerimeter (void)
 {
 	if (!_trapezoid_lateral_side_defined_) {
@@ -350,6 +505,15 @@ static void calcTrapezoidPerimeter (void)
 	_trapezoid_perimeter_ = (base_minor + base_major + 2.0 * lateral_side);
 	_trapezoid_perimeter_defined_ = true;
 }
+#else
+static void calcTrapezoidPerimeter (void)
+{
+	double const base_minor = _trapezoid_base_minor_;
+	double const base_major = _trapezoid_base_major_;
+	double const lateral_side = _trapezoid_lateral_side_;
+	_trapezoid_perimeter_ = (base_minor + base_major + 2.0 * lateral_side);
+}
+#endif
 
 static void calcTrapezoidProps (void)
 {
@@ -363,6 +527,7 @@ static void promptTrapezoidDims (void)
 	setTrapezoidDims();
 }
 
+#if defined(DEBUG) && DEBUG
 static void logTrapezoidInfo (void)
 {
 	if (!_trapezoid_perimeter_defined_ || !_trapezoid_area_defined_) {
@@ -376,7 +541,17 @@ static void logTrapezoidInfo (void)
 	printf("area: %.15e\n", _trapezoid_area_);
 	printf("\n");
 }
+#else
+static void logTrapezoidInfo (void)
+{
+	printf("polygon: trapezoid\n");
+	printf("perimeter: %.15e\n", _trapezoid_perimeter_);
+	printf("area: %.15e\n", _trapezoid_area_);
+	printf("\n");
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void setParallelogramBase (void)
 {
 	double base = 0;
@@ -385,7 +560,17 @@ static void setParallelogramBase (void)
 	_parallelogram_base_ = base;
 	_parallelogram_base_defined_ = true;
 }
+#else
+static void setParallelogramBase (void)
+{
+	double base = 0;
+	printf("input the base of the parallelogram:");
+	scanf("%lf", &base);
+	_parallelogram_base_ = base;
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void setParallelogramLateralSide (void)
 {
 	double lateral_side = 0;
@@ -394,7 +579,17 @@ static void setParallelogramLateralSide (void)
 	_parallelogram_lateral_side_ = lateral_side;
 	_parallelogram_lateral_side_defined_ = true;
 }
+#else
+static void setParallelogramLateralSide (void)
+{
+	double lateral_side = 0;
+	printf("input the lateral side of the parallelogram:");
+	scanf("%lf", &lateral_side);
+	_parallelogram_lateral_side_ = lateral_side;
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void setParallelogramHeight (void)
 {
 	double height = 0;
@@ -403,6 +598,15 @@ static void setParallelogramHeight (void)
 	_parallelogram_height_ = height;
 	_parallelogram_height_defined_ = true;
 }
+#else
+static void setParallelogramHeight (void)
+{
+	double height = 0;
+	printf("input the height of the parallelogram:");
+	scanf("%lf", &height);
+	_parallelogram_height_ = height;
+}
+#endif
 
 static void setParallelogramDims (void)
 {
@@ -411,6 +615,7 @@ static void setParallelogramDims (void)
 	setParallelogramLateralSide();
 }
 
+#if defined(DEBUG) && DEBUG
 static void calcParallelogramPerimeter (void)
 {
 	if (!_parallelogram_base_defined_ || !_parallelogram_height_defined_) {
@@ -424,7 +629,16 @@ static void calcParallelogramPerimeter (void)
 	_parallelogram_perimeter_ = 2.0 * (base + lateral_side);
 	_parallelogram_perimeter_defined_ = true;
 }
+#else
+static void calcParallelogramPerimeter (void)
+{
+	double const base = _parallelogram_base_;
+	double const lateral_side = _parallelogram_lateral_side_;
+	_parallelogram_perimeter_ = 2.0 * (base + lateral_side);
+}
+#endif
 
+#if defined(DEBUG) && DEBUG
 static void calcParallelogramArea (void)
 {
 	if (!_parallelogram_base_defined_ || !_parallelogram_height_defined_) {
@@ -436,6 +650,12 @@ static void calcParallelogramArea (void)
 	_parallelogram_area_ = (_parallelogram_base_ * _parallelogram_height_);
 	_parallelogram_area_defined_ = true;
 }
+#else
+static void calcParallelogramArea (void)
+{
+	_parallelogram_area_ = (_parallelogram_base_ * _parallelogram_height_);
+}
+#endif
 
 static void calcParallelogramProps (void)
 {
@@ -448,6 +668,7 @@ static void promptParallelogramDims (void)
 	setParallelogramDims();
 }
 
+#if defined(DEBUG) && DEBUG
 static void logParallelogramInfo (void)
 {
 	if (!_parallelogram_perimeter_defined_ || !_parallelogram_area_defined_) {
@@ -461,6 +682,15 @@ static void logParallelogramInfo (void)
 	printf("area: %.15e\n", _parallelogram_area_);
 	printf("\n");
 }
+#else
+static void logParallelogramInfo (void)
+{
+	printf("polygon: parallelogram\n");
+	printf("perimeter: %.15e\n", _parallelogram_perimeter_);
+	printf("area: %.15e\n", _parallelogram_area_);
+	printf("\n");
+}
+#endif
 
 void polygon (enum polygon kind)
 {
